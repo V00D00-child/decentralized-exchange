@@ -2,6 +2,7 @@
   "name": "decentralized-exchange",
   "version": "0.1.0",
   "private": true,
+  "description": "Decentralized Ethereum Token Exchange",
   "author": "Idris Bowman",
   "engines": {
     "node": "10.16.3"

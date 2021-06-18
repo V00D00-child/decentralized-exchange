@@ -1,0 +1,3 @@
+{
+    "presets": ["ec2015", "statge-2", "stage-3"]
+}
