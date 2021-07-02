@@ -45,7 +45,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile": "truffle compile",
-    "migrate": "truffle migrate"
+    "migrate": "truffle migrate",
+    "test:contract": "truffle test"
   },
   "eslintConfig": {
     "extends": [
