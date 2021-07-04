@@ -22,8 +22,7 @@ pragma solidity ^0.5.0;
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 // ----------------------------------------------------------------------------
-// ERC20 Token, with the addition of symbol, name and decimals and a
-// fixed supply
+// ERC20 Token, with the addition of symbol, name and decimals and a fixed supply
 // https://en.bitcoinwiki.org/wiki/ERC20
 // ----------------------------------------------------------------------------
 contract Token {
@@ -40,7 +39,7 @@ contract Token {
     // Events
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    constructor() public { 
+    constructor() public {
         name = "Auth Token";
         symbol = "AUTH";
         decimals = 18;
@@ -49,10 +48,11 @@ contract Token {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
+        require(_to != address(0));
+        require(balanceOf[msg.sender] >= _value);
         balanceOf[msg.sender] = balanceOf[msg.sender].sub(_value);
         balanceOf[_to] = balanceOf[_to].add(_value);
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
-
 }
