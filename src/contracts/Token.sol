@@ -42,8 +42,8 @@ contract Token {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() public {
-        name = "Auth Token";
-        symbol = "AUTH";
+        name = "DollHair Token";
+        symbol = "DLH";
         decimals = 18;
         totalSupply = 1000000 * (10 ** uint(decimals));
         balanceOf[msg.sender] = totalSupply; // msg.send is the person deploying the contact

@@ -6,8 +6,8 @@ require('chai')
     .should();
 
 contract('Token', ([deployer, receiver, exchange]) => {
-    const name = 'Auth Token';
-    const symbol = 'AUTH';
+    const name = 'DollHair Token';
+    const symbol = 'DLH';
     const decimals = '18';
     const totalSupply = tokens(1000000).toString(); // 1 million
     let token;
