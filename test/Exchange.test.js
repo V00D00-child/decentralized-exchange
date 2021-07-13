@@ -243,7 +243,8 @@ contract('Exchange', ([deployer, feeAccount, user1, user2]) => {
          });
     });
 
-    describe('order orders', () => {
+    // TODO: Stop at 11:41
+    describe('order actions', () => {
 
         beforeEach(async () => {
             // user1 deposits ether
