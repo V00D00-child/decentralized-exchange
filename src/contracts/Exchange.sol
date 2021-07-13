@@ -29,7 +29,7 @@
 // [x] Withdraw tokens
 // [x] Check blances
 // [x] Make order
-// [] Cancel order
+// [x] Cancel order
 // [] Fill order
 // [] Charge fees
 // ----------------------------------------------------------------------------
@@ -47,11 +47,21 @@ contract Exchange {
     mapping(address => mapping(address => uint256)) public tokens; // {tokenAddress -> userAddress-> amount}
     mapping(uint256 => _Order) public orders; // store all user orders
     uint256 public orderCount; // counter cache
+    mapping(uint256 => bool) public orderCancelled;
 
     // Events
     event Deposit(address token, address user, uint256 amount, uint256 balance);
     event Withdraw(address token, address user, uint256 amount, uint256 balance);
     event Order(
+        uint256 id,
+        address user,
+        address tokenGet,
+        uint256 amountGet,
+        address tokenGive,
+        uint256 amountGive,
+        uint256 timestamp
+    );
+    event Cancel(
         uint256 id,
         address user,
         address tokenGet,
@@ -72,7 +82,7 @@ contract Exchange {
         uint256 timestamp;
     }
 
-    constructor(address _feeAcount, uint256 _feePercent) public{
+    constructor(address _feeAcount, uint256 _feePercent) public {
         feeAccount = _feeAcount;
         feePercent = _feePercent;
     }
@@ -124,5 +134,17 @@ contract Exchange {
         orderCount = orderCount.add(1);
         orders[orderCount] = _Order(orderCount, msg.sender, _tokenGet, _amountGet, _tokenGive, _amountGive, now);
         emit Order(orderCount, msg.sender, _tokenGet, _amountGet, _tokenGive, _amountGive, now);
+    }
+
+    function cancelOrder(uint256 _id) public {
+        // Must be a valid order
+        _Order storage _order = orders[_id];
+
+        // Must be my order
+        require(address(_order.user) == msg.sender);
+        require(_order.id == _id); // The order must exist
+
+        orderCancelled[_id] = true;
+        emit Cancel(_order.id, msg.sender, _order.tokenGet, _order.amountGet, _order.tokenGive, _order.amountGive, now);
     }
 }
