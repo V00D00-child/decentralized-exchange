@@ -37,7 +37,7 @@
     "truffle": "5.1.45",
     "truffle-flattener": "1.5.0",
     "truffle-hdwallet-provider-privkey": "0.3.0",
-    "web3": "1.2.6"
+    "web3": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +46,9 @@
     "eject": "react-scripts eject",
     "compile": "truffle compile",
     "migrate": "truffle migrate",
-    "test:contract": "truffle test"
+    "test:contract": "truffle test",
+    "deploy:contract:dev": "truffle migrate --reset",
+    "seed:script": "truffle exec scripts/seed-exchange.js"
   },
   "eslintConfig": {
     "extends": [

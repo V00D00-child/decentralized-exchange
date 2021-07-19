@@ -9,13 +9,12 @@
 //
 // Enjoy.
 //
-// (c) BokkyPooBah / Bok Consulting Pty Ltd 2018. The MIT Licence.
 // ---------------------------------------------------------------------------- 
 // ----------------------------------------------------------------------------
 // Updated     : To support Solidity version 0.5.0
 // Programmer  : Idris Bowman (www.idrisbowman.com)
-// Link        : https://github.com/
-// Tested      : Remix IDE, 10 Nov 2020
+// Link        : https://idrisbowman.com
+// Tested      : Locally with chai 15 July 2021
 // ----------------------------------------------------------------------------
 
 pragma solidity ^0.5.0;
@@ -42,11 +41,11 @@ contract Token {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() public {
-        name = "DollHair Token";
-        symbol = "DLH";
+        name = "Auth Token";
+        symbol = "AUH";
         decimals = 18;
         totalSupply = 1000000 * (10 ** uint(decimals));
-        balanceOf[msg.sender] = totalSupply; // msg.send is the person deploying the contact
+        balanceOf[msg.sender] = totalSupply;
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
