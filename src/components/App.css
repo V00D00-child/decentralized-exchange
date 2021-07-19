@@ -14,6 +14,28 @@
   z-index: 1
 }
 
+.status-icon-not-connected {
+  color: red;
+  width: 7px;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.status-icon-connected {
+  color: green;
+  width: 7px;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.nav-wallet-status-continaer {
+  display: flex;
+}
+
+.intro-text {
+  color: white;
+}
+
 .content > div {
   width: 20%;
   padding-right: 8px

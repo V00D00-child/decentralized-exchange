@@ -42,7 +42,8 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        {this.props.contractsLoaded ? <Content /> : <div className="content"></div>}
+        {/* Add connect button */}
+        {this.props.contractsLoaded ? <Content /> : <div className="content"><p className="intro-text">Welcome please connect your wallet</p></div>}
       </div>
     );
   }
