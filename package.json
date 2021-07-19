@@ -37,7 +37,7 @@
     "truffle": "5.1.45",
     "truffle-flattener": "1.5.0",
     "truffle-hdwallet-provider-privkey": "0.3.0",
-    "web3": "^1.4.0"
+    "web3": "1.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
