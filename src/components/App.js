@@ -1,34 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
-import Web3 from 'web3';
-import Token from '../abis/Token.json';
+import { 
+  loadWeb3,
+  loadAccount,
+  loadToken,
+  loadExchange 
+} from '../store/interaction';
+import { connect } from 'react-redux';
 
 class App extends Component {
   componentDidMount() {
-    this.loadBlockchainData();
-
+    this.loadBlockchainData(this.props.dispatch);
   }
 
-  async loadBlockchainData() {
-    let web3;
-
+  async loadBlockchainData(dispatch) {
     try {
-      if (window.ethereum) {
-        console.log('new way');
-        web3 = new Web3(window.ethereum);
-      } else {
-        console.log('old way');
-        web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
-      }
-      console.log('web3:', web3)
+      const web3 = await loadWeb3(dispatch);
       const network = await web3.eth.net.getNetworkType();
       const networkId = await web3.eth.net.getId();
-      const accounts = await web3.eth.getAccounts();
-      const token = new web3.eth.Contract(Token.abi, Token.networks[networkId].address);
-      const totalSupply = await token.methods.totalSupply().call();
+      const accounts = await loadAccount(web3, dispatch);
+      const token = await loadToken(web3, networkId, dispatch);
+      const exchange = await loadExchange(web3, networkId, dispatch);
 
-      console.log('token: ', token);
-      console.log('token total supply: ', totalSupply);
     } catch(err) {
       console.log(err);
     }
@@ -130,5 +123,10 @@ class App extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    // TODO: Fill me in ...
+  }
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

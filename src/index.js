@@ -4,10 +4,16 @@ import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import * as serviceWorker from './serviceWorker';
 
+// import redux store
+import configureStore from './store/configureStore';
+import { Provider } from 'react-redux';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={configureStore()}>
+    <React.StrictMode>
+        <App />
+      </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
