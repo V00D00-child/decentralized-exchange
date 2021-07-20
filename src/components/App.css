@@ -1,7 +1,5 @@
 .content  {
-  background-color: #1d1d1d;
-  position: absolute;
-  top: 56px;
+  background-color: #fff;
   left: 0;
   right: 0;
   bottom: 0;
@@ -10,30 +8,8 @@
   flex-wrap: nowrap;
   align-items: stretch;
   justify-content: space-evenly;
-  padding: 8px;
-  z-index: 1
-}
-
-.status-icon-not-connected {
-  color: red;
-  width: 7px;
-  margin-top: 6px;
-  margin-right: 5px;
-}
-
-.status-icon-connected {
-  color: green;
-  width: 7px;
-  margin-top: 6px;
-  margin-right: 5px;
-}
-
-.nav-wallet-status-continaer {
-  display: flex;
-}
-
-.intro-text {
-  color: white;
+  padding: 10px;
+  height: 100vh;
 }
 
 .content > div {
@@ -57,6 +33,122 @@
   padding-right: 0;
   min-width: 240px
 }
+
+/* Connection component */
+.intro-text {
+  color: black;
+}
+
+.status-icon-not-connected {
+  color: red;
+  width: 7px;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.status-icon-connected {
+  color: green;
+  width: 7px;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.nav-wallet-status-container {
+  display: flex;
+}
+
+.nav-wallet-status-connected-container{
+  display: flex;
+}
+
+.wallet-button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.connection-container {
+  text-align:  right;
+  padding: 0;
+  margin: 0;
+}
+
+.wallet-user-settings {
+  margin-left: 5px;
+}
+
+.wallet-user-settings:hover {
+  cursor: pointer;
+}
+
+.btn {
+  transition: all .2s ease-in-out; 
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  transform: scale(1.1); 
+}
+
+#modal-connect {
+  width: 40%;
+  height: 50%;
+  margin: auto;
+  padding: 0 !important;
+  height: fit-content !important;
+}
+
+#modal-account{
+  width: 60%;
+  height: 50%;
+  margin: auto;
+  padding: 0 !important;
+  height: fit-content !important;
+}
+
+#modal-data{
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  padding: 0 !important;
+  height: fit-content !important;
+}
+
+.modal-footer {
+  display: block !important;
+}
+
+.account-view {
+  border: solid 1px;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.copy-to-clipboard:hover {
+  cursor: pointer;
+}
+
+.metamask-icon {
+  width: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#info-tab:hover {
+  cursor: pointer;
+}
+
+.wallet-user-settings {
+  margin: auto;
+  color: white;
+}
+
+.account-display {
+  margin-right: 5px;
+}
+/* _____________ */
 
 @media (max-width:992px) {
   .content {
