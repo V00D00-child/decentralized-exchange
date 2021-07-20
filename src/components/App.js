@@ -7,7 +7,10 @@ import {
   loadWeb3,
   loadAccount,
   loadToken,
-  loadExchange 
+  loadExchange,
+  clearWeb3,
+  clearToken,
+  clearExchange,
 } from '../store/interaction';
 import { connect } from 'react-redux';
 import { contractsLoadedSelector } from '../store/selectors';
@@ -18,10 +21,6 @@ class App extends Component {
     super(props);
     this.connectWallet = this.connectWallet.bind(this);
     this.disConnectWallet = this.disConnectWallet.bind(this);
-  }
-
-  componentDidMount() {
-    // this.loadBlockchainData(this.props.dispatch);
   }
 
   async loadBlockchainData(dispatch) {
@@ -46,23 +45,29 @@ class App extends Component {
     }
   }
 
+  async clearBlockchainData(dispatch) {
+    try {
+      await clearWeb3(dispatch);
+      await clearToken(dispatch);
+      await clearExchange(dispatch);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   connectWallet() {
-    console.log('connect wallet');
     this.loadBlockchainData(this.props.dispatch);
   }
 
-  async disConnectWallet() {
-    console.log('disconnect wallet');
+  disConnectWallet() {
+    this.clearBlockchainData(this.props.dispatch);
   }
 
   render() {
     return (
       <div>
-        <Navbar />
-        <Connection 
-          disConnectWallet = {this.disConnectWallet}
-          connectWallet = {this.connectWallet}     
-        />
+        <Navbar disConnectWallet = {this.disConnectWallet} />
+        <Connection connectWallet = {this.connectWallet} />
         {this.props.contractsLoaded ? <Content /> : <div className=""><h1 className="intro-text text-center">Welcome please connect your wallet</h1></div>}
       </div>
     );

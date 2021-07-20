@@ -15,19 +15,12 @@ class Connection extends Component {
            showWalletInfo: false,
         }
         this.doConnectWallet = this.doConnectWallet.bind(this);
-        this.doDisConnectWallet = this.doDisConnectWallet.bind(this);
       }
 
     async doConnectWallet(e) {
         e.preventDefault();
         this.setState({showConnectAccountModal : false})    
         await this.props.connectWallet();
-    }
-
-    doDisConnectWallet(e) {
-        e.preventDefault();
-        this.props.disConnectWallet();
-        this.setState({ showAccountInfoModal: false });
     }
 
     doToggleConnectModal(e) {

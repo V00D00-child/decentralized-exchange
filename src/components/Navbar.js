@@ -13,6 +13,13 @@ class Navbar extends Component {
       showAccountInfoModal: false,
       isCopied: false,
     }
+    this.doDisConnectWallet = this.doDisConnectWallet.bind(this);
+  }
+
+  async doDisConnectWallet(e) {
+    e.preventDefault();
+    await this.props.disConnectWallet();
+    this.setState({ showAccountInfoModal: false });
   }
 
   doToggleAccountInfoModal(e) {

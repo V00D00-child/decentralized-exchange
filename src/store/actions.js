@@ -13,11 +13,24 @@ export function web3AccountLoaded(account) {
         account
     }
 }
+
+export function web3Cleared() {
+    return {
+        type: 'WEB3_CLEARED'
+    }
+}
+
 // TOKEN
 export function tokenLoaded(contract) {
     return {
         type: 'TOKEN_LOADED',
         contract
+    }
+}
+
+export function tokenCleared() {
+    return {
+        type: 'TOKEN_CLEARED'
     }
 }
 
@@ -28,3 +41,10 @@ export function exchangeLoaded(contract) {
         contract
     }
 }
+
+export function exchangeCleared() {
+    return {
+        type: 'EXCHANGE_CLEARED'
+    }
+}
+

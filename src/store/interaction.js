@@ -3,11 +3,15 @@ import {
     web3Loaded,
     web3AccountLoaded,
     tokenLoaded,
-    exchangeLoaded
+    exchangeLoaded,
+    web3Cleared,
+    tokenCleared,
+    exchangeCleared
 } from './actions';
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 
+// WEB3
 export const loadWeb3 = (dispatch) => {
     if(typeof window.ethereum!=='undefined'){
         const web3 = new Web3(window.ethereum)
@@ -31,6 +35,12 @@ export const loadAccount = async (web3, dispatch) => {
     }
 }
 
+export const clearWeb3 = (dispatch) => {
+  dispatch(web3Cleared())
+  return null;
+}
+
+// TOKEN
 export const loadToken = async (web3, networkId, dispatch) => {
     try {
       const token = new web3.eth.Contract(Token.abi, Token.networks[networkId].address);
@@ -42,6 +52,12 @@ export const loadToken = async (web3, networkId, dispatch) => {
     }
 }
 
+export const clearToken = (dispatch) => {
+  dispatch(tokenCleared())
+  return null;
+}
+
+// Exchange
 export const loadExchange = async (web3, networkId, dispatch) => {
     try {
       const exchange = new web3.eth.Contract(Exchange.abi, Exchange.networks[networkId].address);
@@ -51,4 +67,9 @@ export const loadExchange = async (web3, networkId, dispatch) => {
       console.log('Contract not deployed to the current network. Please select another network with Metamask.');
       return null
     }
+}
+
+export const clearExchange = (dispatch) => {
+  dispatch(exchangeCleared())
+  return null;
 }
