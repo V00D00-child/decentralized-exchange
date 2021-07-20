@@ -12,14 +12,27 @@ import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 
 // WEB3
-export const loadWeb3 = (dispatch) => {
-    if(typeof window.ethereum!=='undefined'){
+/*
+if(typeof window.ethereum!=='undefined'){
         const web3 = new Web3(window.ethereum)
         dispatch(web3Loaded(web3))
         return web3
+    }
+*/
+export const loadWeb3 = (dispatch) => {
+    if(window.ethereum) {
+      console.log('new');
+        const web3 = new Web3(window.ethereum);
+        dispatch(web3Loaded(web3));
+        return web3
+    } else if (window.web3) {
+      console.log('old');
+      const web3 = new Web3(window.web3.currentProvider)
+      dispatch(web3Loaded(web3));
+      return web3
     } else {
-        window.alert('Please install MetaMask')
-        window.location.assign("https://metamask.io/")
+      window.alert('Please install MetaMask');
+      window.open('https://metamask.io/index.html', '_blank');
     }
 }
 
@@ -47,7 +60,6 @@ export const loadToken = async (web3, networkId, dispatch) => {
       dispatch(tokenLoaded(token));
       return token;
     } catch (error) {
-      console.log('Contract not deployed to the current network. Please select another network with Metamask.');
       return null;
     }
 }
@@ -64,7 +76,6 @@ export const loadExchange = async (web3, networkId, dispatch) => {
       dispatch(exchangeLoaded(exchange));
       return exchange;
     } catch (error) {
-      console.log('Contract not deployed to the current network. Please select another network with Metamask.');
       return null
     }
 }

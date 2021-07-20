@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { accountSelector } from '../store/selectors'
 import Modal from 'react-modal';
-import metamaskLogo from '../metamask.png';
+import metamaskLogo from '../assets/images/metamask.png';
 import { FaRegTimesCircle } from 'react-icons/fa';
 
 Modal.setAppElement('#root');

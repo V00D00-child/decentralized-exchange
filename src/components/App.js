@@ -28,18 +28,21 @@ class App extends Component {
       const web3 = await loadWeb3(dispatch);
       await web3.eth.net.getNetworkType();
       const networkId = await web3.eth.net.getId();
+
       const token = await loadToken(web3, networkId, dispatch);
       if (!token) {
+        await clearWeb3(dispatch);
         window.alert('Token smart contract not detected on the current network. Please select another network with Metamask.');
         return;
       }
       const exchange = await loadExchange(web3, networkId, dispatch);
       if (!exchange) {
+        await clearWeb3(dispatch);
         window.alert('Exchange smart contract not detected on the current network. Please select another network with Metamask.');
         return;
       }
-      await loadAccount(web3, dispatch);
 
+      await loadAccount(web3, dispatch);
     } catch(err) {
       console.log(err);
     }
