@@ -41,7 +41,6 @@ class App extends Component {
         window.alert('Exchange smart contract not detected on the current network. Please select another network with Metamask.');
         return;
       }
-
       await loadAccount(web3, dispatch);
     } catch(err) {
       console.log(err);
@@ -76,6 +75,7 @@ class App extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     contractsLoaded: contractsLoadedSelector(state)

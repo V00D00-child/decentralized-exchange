@@ -48,3 +48,12 @@ export function exchangeCleared() {
     }
 }
 
+// TODO: Stop at 13:57
+export function cancelledOrdersLoaded(cancelledOrders) {
+    return {
+        type: 'CANCELLED_ORDERS',
+        cancelledOrders
+    }
+}
+
+

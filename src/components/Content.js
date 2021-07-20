@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { accountSelector } from '../store/selectors'
+import { exchangeSelector } from '../store/selectors'
+import { loadAllOrders } from '../store/interaction';
 
 class Content extends Component {
+    componentDidMount() {
+        this.loadBlockchainData(this.props.dispatch);
+    }
+
+    async loadBlockchainData(dispatch) {
+        try {
+          await loadAllOrders(this.props.exchange, dispatch);
+        } catch(err) {
+          console.log(err);
+        }
+    }
+
   render() {
     return (
         <div className="content">
@@ -78,7 +91,7 @@ class Content extends Component {
 
 function mapStateToProps(state) {
   return {
-    account: accountSelector(state)
+    exchange: exchangeSelector(state)
   }
 }
 

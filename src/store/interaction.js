@@ -6,27 +6,19 @@ import {
     exchangeLoaded,
     web3Cleared,
     tokenCleared,
-    exchangeCleared
+    exchangeCleared,
+    cancelledOrdersLoaded
 } from './actions';
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 
 // WEB3
-/*
-if(typeof window.ethereum!=='undefined'){
-        const web3 = new Web3(window.ethereum)
-        dispatch(web3Loaded(web3))
-        return web3
-    }
-*/
 export const loadWeb3 = (dispatch) => {
     if(window.ethereum) {
-      console.log('new');
         const web3 = new Web3(window.ethereum);
         dispatch(web3Loaded(web3));
         return web3
     } else if (window.web3) {
-      console.log('old');
       const web3 = new Web3(window.web3.currentProvider)
       dispatch(web3Loaded(web3));
       return web3
@@ -69,7 +61,7 @@ export const clearToken = (dispatch) => {
   return null;
 }
 
-// Exchange
+// EXCHANGE
 export const loadExchange = async (web3, networkId, dispatch) => {
     try {
       const exchange = new web3.eth.Contract(Exchange.abi, Exchange.networks[networkId].address);
@@ -83,4 +75,20 @@ export const loadExchange = async (web3, networkId, dispatch) => {
 export const clearExchange = (dispatch) => {
   dispatch(exchangeCleared())
   return null;
+}
+
+// ORDERS
+export const loadAllOrders = async (exchange, dispatch) => {
+  // Fetch cancel orders with the "Cancel" event stream
+  const cancelStream = await exchange.getPastEvents('Cancel', { fromBlock: 0, toBlock: 'latest'});
+  
+  // Format cancelled orders
+  const cancelledOrders = cancelStream.map((event) => event.returnValues);
+  
+  // Add cancelled orders to the redux store
+  dispatch(cancelledOrdersLoaded(cancelledOrders));
+  
+  // Fetch filled orders with the "Trade" event stream
+
+  // Fetch all orders with the "Order" event stream
 }
