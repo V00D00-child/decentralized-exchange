@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { createSelector } from 'reselect';
-import { ETHER_ADDRESS, tokens, ether } from '../helpers';
+import { ETHER_ADDRESS, tokens, ether, RED, GREEN } from '../helpers';
 import moment from 'moment';
 
 // WEB3
@@ -32,20 +32,27 @@ const filledOrders = state => get(state, 'exchange.filledOrders.data', []);
 export const filledOrdersSelector = createSelector(
     filledOrders,
     (orders) => {
+        // Sort orders by date ascending for price comparison
+        orders = orders.sort((a, b) => a.timestamp - b.timestamp);
 
         // Decorate the order
         orders = decorateFilledOrders(orders);
 
         // Sort orders by date descending for display
-        orders = orders.sort((a, b) => b.timestamp - a.timestamp)
-        console.log(orders);
+        orders = orders.sort((a, b) => b.timestamp - a.timestamp);
+        return orders;
     }
 );
 
 const decorateFilledOrders = (orders) => {
+    // track previous order to compare history
+    let previousOrder = orders[0];
     return (
         orders.map((order) => {
-            return order = decorateOrder(order);
+            order = decorateOrder(order);
+            order = decorateFilledOrder(order, previousOrder);
+            previousOrder = order; // Update the previous order once it's decorated
+            return order;
         })
     )
 };
@@ -72,7 +79,30 @@ const decorateOrder = (order) => {
         ...order,
         etherAmount: ether(etherAmount),
         tokenAmount: tokens(tokenAmount),
-        tokenPrice
-        // TODO: Stop at 43:17
+        tokenPrice,
+        formattedTimestamp: moment.unix(order.timestamp).format('h:mm:ss a M/D')
     });
 };
+
+const decorateFilledOrder = (order, previousOrder) => {
+    return ({
+        ...order,
+        tokenPriceClass: tokenPriceClass(order.tokenPrice, order.id, previousOrder)
+    }
+    )
+};
+
+const tokenPriceClass = (tokenPrice, orderId, previousOrder) => {
+    // Show green price if only ine order exists
+    if (previousOrder.id === orderId) {
+        return GREEN;
+    }
+
+    // Show green price if order price higher than previous order
+    // Show red price if order price lower than previous order
+    if (previousOrder.tokenPrice <= tokenPrice) {
+        return GREEN; //SUCCESS
+    } else {
+        return RED; //DANGER
+    }
+}

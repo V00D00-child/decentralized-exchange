@@ -72,11 +72,8 @@ class Content extends Component {
                     <a href="/#" className="card-link">Card link</a>
                     </div>
                 </div>
-            </div>
-            
-            <div className="vertical">
-               <Trades />
-            </div>
+            </div>  
+           <Trades />
       </div>
     )
   }
