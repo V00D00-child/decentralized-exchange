@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 // ----------------------------------------------------------------------------
-// 'FIXED' 'Auth Token' token contract
+// 'FIXED' 'DollHair Token' token contract
 //
-// Symbol      : AUTH
-// Name        : Auth Token
+// Symbol      : DOLL
+// Name        : DollHair Token
 // Total supply: 1,000,000.000000000000000000
 // Decimals    : 18
 //
@@ -41,8 +41,8 @@ contract Token {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor() public {
-        name = "Auth Token";
-        symbol = "AUH";
+        name = "DollHair Token";
+        symbol = "DOLL";
         decimals = 18;
         totalSupply = 1000000 * (10 ** uint(decimals));
         balanceOf[msg.sender] = totalSupply;

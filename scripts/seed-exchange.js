@@ -56,7 +56,7 @@ module.exports = async function(callback) {
     console.log(`Deposited ${amount} tokens from ${user2}`)
 
     /////////////////////////////////////////////////////////////
-    // Seed a Cancelled Order (1)
+    // Seed a Cancelled Order
     //
 
     // User 1 makes order to get tokens
@@ -71,7 +71,7 @@ module.exports = async function(callback) {
     console.log(`Cancelled order from ${user1}`)
 
     /////////////////////////////////////////////////////////////
-    // Seed Filled Orders (3)
+    // Seed Filled Orders
     //
 
     // User 1 makes order
