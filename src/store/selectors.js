@@ -313,3 +313,7 @@ const buildGraphData = (orders) => {
     })
     return graphData;
 }
+
+// CANCELLING ORDERS
+const orderCancelling = state => get(state, 'exchange.orderCancelling', false);
+export const orderCancellingSelector = createSelector(orderCancelling, status => status);
