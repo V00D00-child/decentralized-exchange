@@ -69,7 +69,7 @@ export function allOrdersLoaded(allOrders) {
     }
 }
 
-// OREDER CANCELLING
+// CANCELLING ORDERS
 export function orderCancelling() {
     return {
         type: 'ORDER_CANCELLING'
@@ -82,6 +82,21 @@ export function orderCancelled(order) {
         order
     }
 }
+
+// FILLING ORDERS
+export function orderFilling() {
+    return {
+        type: 'ORDER_FILLING'
+    }
+}
+
+export function orderFilled(order) {
+    return {
+        type: 'ORDER_FILLED',
+        order
+    }
+}
+
 
 
 
