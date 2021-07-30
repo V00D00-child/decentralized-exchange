@@ -146,6 +146,13 @@ export function etherDepositAmountChanged(amount) {
     }
 }
 
+export function tokenDepositAmountChanged(amount) {
+    return {
+        type: 'TOKEN_DEPOSIT_AMOUNT_CHANGED',
+        amount
+    }
+}
+
 // WITHDRAWING
 export function etherWithdrawAmountChanged(amount) {
     return {
@@ -154,6 +161,12 @@ export function etherWithdrawAmountChanged(amount) {
     }
 }
 
+export function tokenWithdrawAmountChanged(amount) {
+    return {
+        type: 'TOKEN_WITHDRAW_AMOUNT_CHANGED',
+        amount
+    }
+}
 
 
 
