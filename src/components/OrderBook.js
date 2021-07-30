@@ -20,7 +20,7 @@ const renderOrder = (order, props) => {
         placement='auto'
         overlay={
           <Tooltip id={order.id}>
-            {`Click here to ${order.orderFillAction}`}
+            {`Click here to ${order.orderFilledAction}`}
           </Tooltip>
         }
       >

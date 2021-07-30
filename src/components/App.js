@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Dev mode
     this.loadBlockchainData(this.props.dispatch);
   }
 
