@@ -23,11 +23,6 @@ class App extends Component {
     this.disConnectWallet = this.disConnectWallet.bind(this);
   }
 
-  componentDidMount() {
-    // Dev mode
-    this.loadBlockchainData(this.props.dispatch);
-  }
-
   async loadBlockchainData(dispatch) {
     try {
       const web3 = await loadWeb3(dispatch);
