@@ -18706,12 +18706,12 @@
         }
       },
       "links": {},
-      "address": "0x1C0b9aC59Fbc4Ae59A44aD43b5a0A985cE78CB2E",
-      "transactionHash": "0x855ffa0f67bbc182e3174c98ca5cbd5a7e03b959f79155bc467be20d4dd0e104"
+      "address": "0xbBA95936049503e40013C60b251A91FF8544D10f",
+      "transactionHash": "0xd88292d872070e708cfddc3af7212fd522008fa489985867caea6e5d67da8f9f"
     }
   },
   "schemaVersion": "3.2.5",
-  "updatedAt": "2021-07-31T14:54:11.496Z",
+  "updatedAt": "2021-07-31T18:28:31.704Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

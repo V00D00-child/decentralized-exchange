@@ -50,7 +50,10 @@
     "migrate": "truffle migrate",
     "test:contract": "truffle test",
     "deploy:contract:dev": "truffle migrate --reset",
-    "seed:script": "truffle exec scripts/seed-exchange.js",
+    "seed:script:dev": "truffle exec scripts/seed-exchange.js",
+    "deploy:contract:kovan": "truffle migrate --network kovan",
+    "seed:script:kovan": "truffle exec scripts/seed-exchange.js --network kovan",
+    "findContracts": "truffle networks",
     "dev:startup": ""
   },
   "eslintConfig": {
