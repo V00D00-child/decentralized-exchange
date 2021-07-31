@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tab, Tabs } from 'react-bootstrap';
+import { FiRefreshCw } from 'react-icons/fi';
 import { 
     web3Selector,
     exchangeSelector,
@@ -28,7 +29,8 @@ import {
     etherDepositAmountChanged, 
     etherWithdrawAmountChanged,
     tokenDepositAmountChanged,
-    tokenWithdrawAmountChanged
+    tokenWithdrawAmountChanged,
+    balancesLoading
 } from '../store/actions'
 
 const showForm = (props) => {
@@ -206,6 +208,11 @@ class Balance extends Component {
                 <div className="card bg-dark text-white">
                     <div className="card-header">
                         Balance
+                        <FiRefreshCw className="balance-refresh" onClick={(e) => {
+                            this.props.dispatch(balancesLoading());
+                            this.loadBlockchainData()
+                        }
+                        }/>
                     </div>
                     <div className="card-body">
                        { this.props.showForm ? showForm(this.props): <Spinner />}

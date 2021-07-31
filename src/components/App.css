@@ -150,6 +150,15 @@
 }
 /* _____________ */
 
+/* Balance component */
+.balance-refresh {
+  margin-left: 5px;
+}
+
+.balance-refresh:hover {
+  cursor: pointer;
+}
+
 @media (max-width:992px) {
   .content {
     display: block;
