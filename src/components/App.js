@@ -77,8 +77,8 @@ class App extends Component {
             the app without spending real Ether)
           </p>
           <hr></hr>
-          <p className="text-left">Exchange smart contract(Kovan Test Network):<a target="_blank" rel="noopener noreferrer" href="https://kovan.etherscan.io/">https://kovan.etherscan.io/</a></p>
-          <p className="text-left">DollHair ERC-20 token smart contract(Kovan Test Network):<a target="_blank" rel="noopener noreferrer" href="https://kovan.etherscan.io/">https://kovan.etherscan.io/</a></p>
+          <p className="text-left">Exchange smart contract(Kovan Test Network):<a target="_blank" rel="noopener noreferrer" href="https://kovan.etherscan.io/address/0x9d7aE4728A11Cc989d681A549F2660dB596A3941">https://kovan.etherscan.io/address/0x9d7aE4728A11Cc989d681A549F2660dB596A3941</a></p>
+          <p className="text-left">DollHair ERC-20 token smart contract(Kovan Test Network):<a target="_blank" rel="noopener noreferrer" href="https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6">https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6</a></p>
           <p>Author: Idris Bowman</p>
           <ul>
             <li>Website: <a target="_blank" rel="noopener noreferrer" href="https://idrisbowman.com">https://idrisbowman.com</a></li>
