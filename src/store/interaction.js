@@ -39,7 +39,7 @@ export const loadWeb3 = (dispatch) => {
       dispatch(web3Loaded(web3));
       return web3
     } else {
-      window.alert('Please install MetaMask');
+      window.alert('Please install MetaMask- loadWeb3');
       window.open('https://metamask.io/index.html', '_blank');
     }
 }
@@ -53,7 +53,7 @@ export const loadAccount = async (web3, dispatch) => {
       dispatch(web3AccountLoaded(account, networkId));
       return account
     } else {
-      window.alert('Please login with MetaMask');
+      window.alert('Please login with MetaMask- loadAccount');
       return null;
     }
 }
@@ -188,7 +188,7 @@ export const loadBalances = async (dispatch, web3, exchange, token, account) => 
     // Trigger all balances loaded
     dispatch(balancesLoaded());
   } else {
-    window.alert('Please login with MetaMask');
+    window.alert('Please login with MetaMask- loadBalances');
   }
 };
 

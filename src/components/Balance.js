@@ -190,7 +190,7 @@ class Balance extends Component {
                 clearInterval(interval);
                 return;
             }
-        }.bind(this), 10);
+        }.bind(this), 1000);
     }
 
     async loadBlockchainData() {
