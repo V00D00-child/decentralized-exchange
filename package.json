@@ -54,7 +54,8 @@
     "deploy:contract:kovan": "truffle migrate --network kovan",
     "seed:script:kovan": "truffle exec scripts/seed-exchange.js --network kovan",
     "findContracts": "truffle networks",
-    "dev:startup": ""
+    "contact:flatten": "npx truffle-flattener ./src/contracts/Exchange.sol > ./text.sol",
+    "contract:complile": "npx truffle compile"
   },
   "eslintConfig": {
     "extends": [

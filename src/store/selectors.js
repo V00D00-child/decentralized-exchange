@@ -10,6 +10,9 @@ export const accountSelector = createSelector(account, a => a);
 const web3 = state => get(state, 'web3.connection');
 export const web3Selector = createSelector(web3, w => w);
 
+const networkId = state => get(state, 'web3.networkId');
+export const networkIdSelector = createSelector(networkId, a => a);
+
 // TOKEN
 const tokenLoaded = state => get(state, 'token.loaded', false);
 export const tokenLoadedSelector = createSelector(tokenLoaded, tl => tl);

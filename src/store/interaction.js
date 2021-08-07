@@ -47,8 +47,10 @@ export const loadWeb3 = (dispatch) => {
 export const loadAccount = async (web3, dispatch) => {
     const accounts = await web3.eth.getAccounts();
     const account =  accounts[0];
+    const networkId = await web3.eth.net.getId();
+
     if(typeof account !== 'undefined') {
-      dispatch(web3AccountLoaded(account));
+      dispatch(web3AccountLoaded(account, networkId));
       return account
     } else {
       window.alert('Please login with MetaMask');

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { accountSelector } from '../store/selectors'
+import { accountSelector, networkIdSelector } from '../store/selectors'
 import {FaCircle} from 'react-icons/fa';
 import Modal from 'react-modal';
 import { FaCopy, FaCheckCircle } from 'react-icons/fa';
@@ -54,6 +54,12 @@ class Navbar extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {this.props.networkId === 42  &&
+        <div className="nav-network-icon">
+          <p className="nav-network-icon-text">Kovan</p>
+        </div>
+        }
+       
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
 
@@ -63,7 +69,7 @@ class Navbar extends Component {
               <div className="nav-wallet-status-connected-container">
                 <a
                   className="nav-link small account-display"
-                  href={`https://etherscan.io/address/${this.props.account}`}
+                  href={this.props.networkId === 42 ? `https://kovan.etherscan.io/address/${this.props.account}` : `https://etherscan.io/address/${this.props.account}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -109,7 +115,7 @@ class Navbar extends Component {
                       }
                       <a
                         className="small"
-                        href={`https://etherscan.io/address/${this.props.account}`}
+                        href={this.props.networkId === 42 ? `https://kovan.etherscan.io/address/${this.props.account}` : `https://etherscan.io/address/${this.props.account}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -129,7 +135,8 @@ class Navbar extends Component {
 
 function mapStateToProps(state) {
   return {
-    account: accountSelector(state)
+    account: accountSelector(state),
+    networkId: networkIdSelector(state)
   }
 }
 

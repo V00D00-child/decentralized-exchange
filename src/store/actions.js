@@ -7,10 +7,11 @@ export function web3Loaded(connection) {
     }
 }
 
-export function web3AccountLoaded(account) {
+export function web3AccountLoaded(account, networkId) {
     return {
         type: 'WEB3_ACCOUNT_LOADED',
-        account
+        account,
+        networkId
     }
 }
 

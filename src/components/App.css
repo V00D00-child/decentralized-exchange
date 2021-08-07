@@ -34,6 +34,22 @@
   min-width: 240px
 }
 
+.nav-network-icon {
+  margin-right: 8px;
+  background: gray;
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 10%;
+  height: fit-content;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.nav-network-icon-text {
+  margin: auto;
+  color: white;
+}
+
 /* Connection component */
 .intro-text {
   color: black;
