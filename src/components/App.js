@@ -72,7 +72,7 @@ class App extends Component {
         <Connection connectWallet = {this.connectWallet} />
         {this.props.contractsLoaded ? <Content /> : 
         <div className="p-5">
-          <h1 className="intro-text text-center">This is a crypto currency exchange powered by smart contracts</h1>
+          <h1 className="intro-text text-center">This is a decentralized crypto currency exchange powered by smart contracts</h1>
           <p className="text-center small">(All transaction on this DApp takes place on Kovan test network. This allows you to intract with
             the app without spending real Ether)
           </p>
