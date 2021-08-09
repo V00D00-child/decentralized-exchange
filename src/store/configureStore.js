@@ -11,16 +11,16 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 export default function configureStore(preloadedState) {
-    // if (process.env.NODE_ENV === 'production') {
-    //     return createStore(
-    //         rootReducers,
-    //         preloadedState,
-    //     );
-    //   } else {
+    if (process.env.NODE_ENV === 'production') {
+        return createStore(
+            rootReducers,
+            preloadedState,
+        );
+      } else {
         return createStore(
             rootReducers,
             preloadedState,
             composeEnhancers(applyMiddleware(...middleware, loggerMiddleware))
         );
-    // }
+    }
 }

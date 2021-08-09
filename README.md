@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Decentralized Cryptocurrency Exchange (TRADE, DEPOSIT, WITHDRAW !!:gem: :gem:)
+## Powered by Ethereum smart contracts. Currently deployed to Kovan test network
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+- Trade Ether for DollHair token, or DollHair token for Ether(real-time)
+- Deposit Ether
+- Deposit DollHair token
+- Make buy/sell orders
+- Fill open buy/sell order
+- Price charts
 
-## Available Scripts
+## Try app on Kovan test network 
+- Make sure your metamask wallet is connect to Kovan network
+- Fund your wallet with ETH (this is ETH on Kovan test network) us this site to get some ETH https://linkfaucet.protofire.io/kovan
+- Import DollHair token address into Metmask (0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6)
 
-In the project directory, you can run:
+## Smart Contracts
+Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
+DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
 
-### `npm start`
+## Verified smart contracts( Kovan test network)
+Exchange - https://kovan.etherscan.io/address/0x9d7aE4728A11Cc989d681A549F2660dB596A3941
+DollHair Token - https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Testing smart contracts
+"npm run test:contract"
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Set up to run locally
+1. npm install
+2. Install Ganache and start it up locally(this is our local blockchain network)
+3. Connect MetaMask to local blockchain network and import private keys of 1st and 2nd address in Ganache(note: we need to accounts to make trades, one account makes an order and the other account fills that order)
+4. Run smart contract deployment script "npm run deploy:contract:dev" (this script will deploy smart contracts to local blockchain and overwrite any exist contracts)
+5. Run script to seed exchange(this will prefill the app with data) "npm run seed:script:dev"
+6. Start React app "npm run start"
+7. Import local token address into Metmask
+8. Go to localhost:3000/ in the browser
+9. Connect wallet, make trades
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tech stack
+- node
+- MetaMask (crypto wallet) - https://metamask.io/
+- truffle (used to compile, test, debug and deploy smart contracts) - https://www.trufflesuite.com/docs/truffle/overview
+- web3 (Javascript API that interacts with a local or remote ethereum node using HTTP) - https://web3js.readthedocs.io/en/v1.3.4/
+- Ganache (local development blockchain) https://www.trufflesuite.com/ganache
+- ReactJS (clients side app)
+- React-redux (client side state managment)
+- Kovan - test network for smart contracts
