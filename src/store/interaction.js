@@ -31,9 +31,9 @@ import { ETHER_ADDRESS } from '../helpers';
 // WEB3
 export const loadWeb3 = (dispatch) => {
     if(window.ethereum) {
-        const web3 = new Web3(window.ethereum);
-        dispatch(web3Loaded(web3));
-        return web3
+      const web3 = new Web3(window.ethereum);
+      dispatch(web3Loaded(web3));
+      return web3
     } else if (window.web3) {
       const web3 = new Web3(window.web3.currentProvider)
       dispatch(web3Loaded(web3));
