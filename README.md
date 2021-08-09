@@ -9,21 +9,23 @@
 - Fill open buy/sell order
 - Price charts
 
+
 ## Try app on Kovan test network 
 - Make sure your metamask wallet is connect to Kovan network
 - Fund your wallet with ETH (this is ETH on Kovan test network) us this site to get some ETH https://linkfaucet.protofire.io/kovan
 - Import DollHair token address into Metmask (0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6)
+- https://exchange.idrisbowman.com (<-------try app)
 
-## Smart Contracts
-Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
-DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
+
+## Smart Contracts Overview
+1. Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
+2. DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
+
 
 ## Verified smart contracts( Kovan test network)
-Exchange - https://kovan.etherscan.io/address/0x9d7aE4728A11Cc989d681A549F2660dB596A3941
-DollHair Token - https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6
+- Exchange - https://kovan.etherscan.io/address/0x9d7aE4728A11Cc989d681A549F2660dB596A3941
+- DollHair Token - https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6
 
-## Testing smart contracts
-"npm run test:contract"
 
 ## Set up to run locally
 1. npm install
@@ -35,6 +37,10 @@ DollHair Token - https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321
 7. Import local token address into Metmask
 8. Go to localhost:3000/ in the browser
 9. Connect wallet, make trades
+
+## Testing smart contracts
+"npm run test:contract"
+
 
 ## Tech stack
 - node
