@@ -18,8 +18,8 @@
 
 
 ## Smart Contracts Overview
-1. Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
-2. DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
+- Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
+- DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
 
 
 ## Verified smart contracts( Kovan test network)
@@ -43,7 +43,7 @@
 
 
 ## Tech stack
-- node
+- infura (blockchain node) - https://infura.io/
 - MetaMask (crypto wallet) - https://metamask.io/
 - truffle (used to compile, test, debug and deploy smart contracts) - https://www.trufflesuite.com/docs/truffle/overview
 - web3 (Javascript API that interacts with a local or remote ethereum node using HTTP) - https://web3js.readthedocs.io/en/v1.3.4/
