@@ -31,7 +31,7 @@ import {
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
-const INFURA_ID = '3d05a551f26e46f99e2c9c0f0fd052c3';
+const INFURA_ID = '';
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
