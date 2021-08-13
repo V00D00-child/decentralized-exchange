@@ -10,13 +10,6 @@
 - Price charts
 
 
-## Try app on Kovan test network 
-- Make sure your metamask wallet is connect to Kovan network
-- Fund your wallet with ETH (this is ETH on Kovan test network) us this site to get some ETH https://linkfaucet.protofire.io/kovan
-- Import DollHair token address into Metmask (0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6)
-- https://exchange.idrisbowman.com (<-------try app)
-
-
 ## Smart Contracts Overview
 - Exchange - This is the smart contract that wholes logic to make/fill orders, deposit/withdraw funds. It also holds fees(10%) for each trade that is made on the exchange.
 - DollHair Token - This is my own personal ERC-20 token I create to trade on this exchange.
