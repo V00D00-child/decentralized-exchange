@@ -4,8 +4,14 @@ function web3(state = {}, action) {
     switch (action.type) {
         case 'WEB3_LOADED':
             return { ...state, connection: action.connection };
+        case 'WEB3_MODAL_LOADED':
+            return { ...state, web3Modal: action.web3Modal };
+        case 'WEB3_MODAL_ACCOUNT_LOADED':
+            return { ...state, account: action.account, networkId: action.networkId, provider: action.provider };
         case 'WEB3_ACCOUNT_LOADED':
             return { ...state, account: action.account, networkId: action.networkId };
+        case 'WEB3_ACCOUNT_UPDATED':
+            return {  ...state, account: action.account };
         case 'WEB3_CLEARED':
             return {};
         case 'ETHER_BALANCE_LOADED':

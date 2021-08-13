@@ -5,15 +5,27 @@ import Content from './Content';
 import Connection from './Connection';
 import { 
   loadWeb3,
-  loadAccount,
+  // loadAccount,
   loadToken,
   loadExchange,
   clearWeb3,
   clearToken,
   clearExchange,
+  loadWeb3Modal,
+  loadAccountWeb3Modal,
+  loadBalances,
 } from '../store/interaction';
 import { connect } from 'react-redux';
-import { contractsLoadedSelector, accountSelector } from '../store/selectors';
+import { 
+  contractsLoadedSelector,
+  accountSelector,
+  web3ModalSelector,
+  web3ModalProviderSelector,
+  web3Selector,
+  tokenSelector,
+  exchangeSelector
+} from '../store/selectors';
+import { web3AccountUpdated } from '../store/actions';
 
 class App extends Component {
 
@@ -23,7 +35,13 @@ class App extends Component {
     this.disConnectWallet = this.disConnectWallet.bind(this);
   }
 
+  async componentDidMount() {
+    await loadWeb3Modal(this.props.dispatch);
+  }
+
   async loadBlockchainData(dispatch) {
+    let provider;
+
     try {
       const web3 = await loadWeb3(dispatch);
       await web3.eth.net.getNetworkType();
@@ -41,14 +59,59 @@ class App extends Component {
         window.alert('Exchange smart contract not detected on the current network. Please select another network with Metamask.');
         return;
       }
-      await loadAccount(web3, dispatch);
+
+      // load account with web3Modal
+      console.log('testing,', this.props.web3Modal);
+
+      if (!this.props.web3Modal) {
+        await loadWeb3Modal(dispatch);
+      }
+      
+      await this.props.web3Modal.clearCachedProvider();
+
+      // Activate windows with providers (MM and WC) choice
+      provider = await this.props.web3Modal.connect();
+      loadAccountWeb3Modal(web3, dispatch, provider);
+
+      // await loadAccount(web3, dispatch);
     } catch(err) {
-      console.log(err);
+      console.log("Could not get a wallet connection", err);
+      return;
     }
+
+    // Update account
+    provider.on("accountsChanged", async (accounts) => {
+      if(provider.isMetaMask && provider.selectedAddress !== null){
+        await dispatch(web3AccountUpdated(accounts[0]));
+
+        // reload balances
+        await loadBalances(
+          dispatch,
+          this.props.web3, 
+          this.props.exchange,
+          this.props.token, 
+          this.props.account
+        );
+      }
+    });
+  
+    // Update network
+    provider.on("chainChanged", async () => {
+      this.clearBlockchainData(dispatch);
+      window.alert('Only support for Kovan Network');
+    });
   }
 
   async clearBlockchainData(dispatch) {
     try {
+      if (this.props.provider !== null && this.props.provider.isMetaMask){
+        await this.props.provider.close; // Disconnect Web3Modal+MetaMask
+      }
+
+      // Restart provider session
+      await this.props.web3Modal.clearCachedProvider();
+
+      // clear web3 and smart contracts
       await clearWeb3(dispatch);
       await clearToken(dispatch);
       await clearExchange(dispatch);
@@ -115,6 +178,11 @@ function mapStateToProps(state) {
   return {
     contractsLoaded: contractsLoadedSelector(state),
     account: accountSelector(state),
+    web3Modal: web3ModalSelector(state),
+    provider : web3ModalProviderSelector(state),
+    web3: web3Selector(state),
+    token: tokenSelector(state),
+    exchange: exchangeSelector(state)
   }
 }
 

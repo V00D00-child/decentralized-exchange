@@ -1,10 +1,14 @@
 import Web3 from 'web3';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 import {
     web3Loaded,
     web3AccountLoaded,
+    web3ModalAccountLoaded,
     tokenLoaded,
     exchangeLoaded,
     web3Cleared,
+    web3ModalLoaded,
     tokenCleared,
     exchangeCleared,
     cancelledOrdersLoaded,
@@ -27,10 +31,12 @@ import {
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
+const INFURA_ID = '3d05a551f26e46f99e2c9c0f0fd052c3';
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
     if(window.ethereum) {
+      window.ethereum.autoRefreshOnNetworkChange = false;
       const web3 = new Web3(window.ethereum);
       dispatch(web3Loaded(web3));
       return web3
@@ -44,18 +50,60 @@ export const loadWeb3 = (dispatch) => {
     }
 }
 
-export const loadAccount = async (web3, dispatch) => {
-    const accounts = await web3.eth.getAccounts();
-    const account =  accounts[0];
-    const networkId = await web3.eth.net.getId();
+export const loadWeb3Modal = (dispatch) => {
+  /** Settings for:
+    *   Web3Modal+WalletConnect 
+    *   Web3Modal+MetaMask,
+    *   MetaMask.
+  */
+  const providerOptions = {
+    walletconnect: {
+      package: WalletConnectProvider,
+      options: {
+        infuraId: INFURA_ID,
+      }
+    }
+  };
+
+  const web3Modal = new Web3Modal({
+    cacheProvider: true, // optional
+    providerOptions, // required
+    disableInjectedProvider: false, // Declare MetaMask
+  });
+  dispatch(web3ModalLoaded(web3Modal));
+}
+
+export const loadAccountWeb3Modal = async (web3, dispatch, provider) => {
+  let account, networkId;
+  if(provider.isMetaMask){ // When MetaMask was chosen as a provider
+    web3 = new Web3(provider);
+    account = provider.selectedAddress;
+    networkId = await web3.eth.net.getId();
 
     if(typeof account !== 'undefined') {
-      dispatch(web3AccountLoaded(account, networkId));
+      dispatch(web3ModalAccountLoaded(account, networkId, provider));
       return account
     } else {
       window.alert('Please login with MetaMask or make sure your account is connected to our app');
       return null;
     }
+  } else {
+    window.alert('Error, provider not recognized')
+  }
+}
+
+export const loadAccount = async (web3, dispatch) => {
+  const accounts = await web3.eth.getAccounts();
+  const account =  accounts[0];
+  const networkId = await web3.eth.net.getId();
+
+  if(typeof account !== 'undefined') {
+    dispatch(web3AccountLoaded(account, networkId));
+    return account
+  } else {
+    window.alert('Please login with MetaMask or make sure your account is connected to our app');
+    return null;
+  }
 }
 
 export const clearWeb3 = (dispatch) => {

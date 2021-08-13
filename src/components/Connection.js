@@ -19,18 +19,18 @@ class Connection extends Component {
 
     async doConnectWallet(e) {
         e.preventDefault();
-        this.setState({showConnectAccountModal : false})    
+        // this.setState({showConnectAccountModal : false})    
         await this.props.connectWallet();
     }
-
+    
     doToggleConnectModal(e) {
         e.preventDefault();
-        this.setState({ showConnectAccountModal: !this.state.showConnectAccountModal });
+        // this.setState({ showConnectAccountModal: !this.state.showConnectAccountModal });
     }
 
     doToggleWalletInfo(e) {
         e.preventDefault();
-        this.setState({ showWalletInfo: !this.state.showWalletInfo });
+        // this.setState({ showWalletInfo: !this.state.showWalletInfo });
     }
     
 
@@ -40,7 +40,8 @@ class Connection extends Component {
             {/* connect wallet */}
             {!this.props.account &&
               <div>
-                <button className="btn btn-primary wallet-button" onClick={(e) => this.doToggleConnectModal(e)}>Connect Wallet</button>
+                {/* <button className="btn btn-primary wallet-button" onClick={(e) => this.doToggleConnectModal(e)}>Connect Wallet</button> */}
+                <button className="btn btn-primary wallet-button" onClick={(e) => this.doConnectWallet(e)}>Connect Wallet</button>
               </div>
             }
 

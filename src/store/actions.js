@@ -7,11 +7,34 @@ export function web3Loaded(connection) {
     }
 }
 
+export function web3ModalLoaded(web3Modal) {
+    return {
+        type: 'WEB3_MODAL_LOADED',
+        web3Modal
+    }
+}
+
 export function web3AccountLoaded(account, networkId) {
     return {
         type: 'WEB3_ACCOUNT_LOADED',
         account,
         networkId
+    }
+}
+
+export function web3ModalAccountLoaded(account, networkId, provider) {
+    return {
+        type: 'WEB3_MODAL_ACCOUNT_LOADED',
+        account,
+        networkId,
+        provider
+    }
+}
+
+export function web3AccountUpdated(account) {
+    return {
+        type: 'WEB3_ACCOUNT_UPDATED',
+        account,
     }
 }
 

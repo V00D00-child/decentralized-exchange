@@ -7,8 +7,14 @@ import moment from 'moment';
 const account = state => get(state, 'web3.account');
 export const accountSelector = createSelector(account, a => a);
 
+const web3ModalProvider = state => get(state, 'web3.provider');
+export const web3ModalProviderSelector = createSelector(web3ModalProvider, p => p);
+
 const web3 = state => get(state, 'web3.connection');
 export const web3Selector = createSelector(web3, w => w);
+
+const web3Modal = state => get(state, 'web3.web3Modal');
+export const web3ModalSelector = createSelector(web3Modal, w => w);
 
 const networkId = state => get(state, 'web3.networkId');
 export const networkIdSelector = createSelector(networkId, a => a);
