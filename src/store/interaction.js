@@ -65,7 +65,7 @@ export const loadWeb3Modal = (dispatch) => {
   };
 
   const web3Modal = new Web3Modal({
-    cacheProvider: true, // optional
+    cacheProvider: false, // optional
     providerOptions, // required
     disableInjectedProvider: false, // Declare MetaMask
   });
@@ -189,6 +189,7 @@ export const cancelOrder = (dispatch, exchange, order, account) => {
 
 // FILL ORDERS
 export const fillOrder = (dispatch, exchange, order, account) => {
+  // TODO: Check balances before fill orders
   exchange.methods.fillOrder(order.id).send({ from: account })
     .on('transactionHash', (hash) => {
       dispatch(orderFilling());

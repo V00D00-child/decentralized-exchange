@@ -253,7 +253,7 @@ export const myFilledOrdersSelector = createSelector(
     filledOrders,
     (account, orders) => {
         // Find out orders
-        orders = orders.filter((o) => o.user === account || o.userFill === account);
+        orders = orders.filter((o) => o.user.toLowerCase() === account.toLowerCase() || o.userFill.toLowerCase() === account.toLowerCase());
         // Sort by date
         orders = orders.sort((a, b) => a.timestamp - b.timestamp);
         // Decorate orders - add display attributes
@@ -269,7 +269,7 @@ export const myOpenOrdersSelector = createSelector(
     openOrders,
     (account, orders) => {
         // Find out orders
-        orders = orders.filter((o) => o.user === account);
+        orders = orders.filter((o) => o.user.toLowerCase() === account.toLowerCase());
         // Decorate orders - add display attributes
         orders = decorateMyOpenOrders(orders);
         // Sort by date descending
