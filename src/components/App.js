@@ -26,6 +26,7 @@ import {
   exchangeSelector
 } from '../store/selectors';
 import { web3AccountUpdated } from '../store/actions';
+let providerCount = 0;
 
 class App extends Component {
 
@@ -61,8 +62,6 @@ class App extends Component {
       }
 
       // load account with web3Modal
-      console.log('testing,', this.props.web3Modal);
-
       if (!this.props.web3Modal) {
         await loadWeb3Modal(dispatch);
       }
@@ -71,7 +70,38 @@ class App extends Component {
 
       // Activate windows with providers (MM and WC) choice
       provider = await this.props.web3Modal.connect();
-      loadAccountWeb3Modal(web3, dispatch, provider);
+      providerCount ++;
+      await loadAccountWeb3Modal(web3, dispatch, provider);
+
+      // create provider events
+      if (providerCount <= 1 ) {
+        this.props.provider.on("accountsChanged", async (accounts) => {
+          if (!this.props.provider) {
+            return;
+          }
+          if(provider.isMetaMask && provider.selectedAddress !== null){
+            await dispatch(web3AccountUpdated(accounts[0]));
+  
+            // reload balances
+            await loadBalances(
+              dispatch,
+              this.props.web3, 
+              this.props.exchange,
+              this.props.token, 
+              this.props.account
+            );
+          }
+          console.log('accountsChanged active')
+        });
+      
+        this.props.provider.on("networkChanged", async (networkId) => {
+          if (!this.props.provider) {
+            return;
+          }
+          await this.clearBlockchainData(dispatch);
+          window.alert('Only support for Kovan Network');
+        });
+      }
 
       // await loadAccount(web3, dispatch);
     } catch(err) {
@@ -79,27 +109,6 @@ class App extends Component {
       return;
     }
 
-    // Update account
-    provider.on("accountsChanged", async (accounts) => {
-      if(provider.isMetaMask && provider.selectedAddress !== null){
-        await dispatch(web3AccountUpdated(accounts[0]));
-
-        // reload balances
-        await loadBalances(
-          dispatch,
-          this.props.web3, 
-          this.props.exchange,
-          this.props.token, 
-          this.props.account
-        );
-      }
-    });
-  
-    // Update network
-    provider.on("chainChanged", async () => {
-      this.clearBlockchainData(dispatch);
-      window.alert('Only support for Kovan Network');
-    });
   }
 
   async clearBlockchainData(dispatch) {

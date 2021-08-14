@@ -107,6 +107,7 @@ export const loadAccount = async (web3, dispatch) => {
 }
 
 export const clearWeb3 = (dispatch) => {
+  console.log('infs', INFURA_ID)
   dispatch(web3Cleared())
   return null;
 }
