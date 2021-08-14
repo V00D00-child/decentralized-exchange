@@ -129,8 +129,8 @@ class App extends Component {
       if (this.props.provider !== null && this.props.provider.isMetaMask){
         await this.props.provider.close; // Disconnect Web3Modal+MetaMask
       } else if (this.props.provider !== null && this.props.provider.wc) {
-        await this.state.provider.stop(); // Disconnect Web3Modal+WalletConnnect (QR code remains)
-        await this.state.provider.disconnect();
+        await this.props.provider.stop(); // Disconnect Web3Modal+WalletConnnect (QR code remains)
+        await this.props.provider.disconnect();
       }
 
       // Restart provider session
