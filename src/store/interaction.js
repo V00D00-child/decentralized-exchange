@@ -31,7 +31,6 @@ import {
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
-require('dotenv').config();
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
@@ -87,8 +86,15 @@ export const loadAccountWeb3Modal = async (web3, dispatch, provider) => {
       window.alert('Please login with MetaMask or make sure your account is connected to our app');
       return null;
     }
-  } else if (provider.wc){ 
-    window.alert('Sorry we do not yet support Wallet Connect please login with MetaMask');
+  } else if (provider.wc) { 
+    console.log('using wallet connect')
+    account = await provider.accounts[0];
+    web3 = new Web3(new Web3.providers.HttpProvider(`https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_API_KEY}`));
+    
+    if(typeof account !== 'undefined') {
+      dispatch(web3ModalAccountLoaded(account, networkId, provider));
+      return account
+    } 
   } else {
     window.alert('Error, provider not recognized')
   }

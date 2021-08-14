@@ -91,7 +91,19 @@ class App extends Component {
               this.props.account
             );
             return;
-          }
+          } else if (provider.wc){
+            await dispatch(web3AccountUpdated(accounts[0]));
+  
+            // reload balances
+            await loadBalances(
+              dispatch,
+              this.props.web3, 
+              this.props.exchange,
+              this.props.token, 
+              this.props.account
+            );
+            return;
+           }
         });
       
         this.props.provider.on("networkChanged", async (networkId) => {
@@ -116,6 +128,9 @@ class App extends Component {
     try {
       if (this.props.provider !== null && this.props.provider.isMetaMask){
         await this.props.provider.close; // Disconnect Web3Modal+MetaMask
+      } else if (this.props.provider !== null && this.props.provider.wc) {
+        await this.state.provider.stop(); // Disconnect Web3Modal+WalletConnnect (QR code remains)
+        await this.state.provider.disconnect();
       }
 
       // Restart provider session
