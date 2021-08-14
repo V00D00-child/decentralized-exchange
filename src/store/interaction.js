@@ -31,7 +31,7 @@ import {
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
-const INFURA_ID = process.env.INFURA_API_KEY || '';
+require('dotenv').config();
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
@@ -60,7 +60,7 @@ export const loadWeb3Modal = (dispatch) => {
     walletconnect: {
       package: WalletConnectProvider,
       options: {
-        infuraId: INFURA_ID,
+        infuraId: process.env.REACT_APP_INFURA_API_KEY,
       }
     }
   };
@@ -87,6 +87,8 @@ export const loadAccountWeb3Modal = async (web3, dispatch, provider) => {
       window.alert('Please login with MetaMask or make sure your account is connected to our app');
       return null;
     }
+  } else if (provider.wc){ 
+    window.alert('Sorry we do not yet support Wallet Connect please login with MetaMask');
   } else {
     window.alert('Error, provider not recognized')
   }
@@ -107,7 +109,6 @@ export const loadAccount = async (web3, dispatch) => {
 }
 
 export const clearWeb3 = (dispatch) => {
-  console.log('infs', INFURA_ID);
   dispatch(web3Cleared())
   return null;
 }
@@ -175,8 +176,8 @@ export const cancelOrder = (dispatch, exchange, order, account) => {
       dispatch(orderCancelling());
     })
     .on('error', (error) => {
-      console.log(error);
-      window.alert('There was an error!');
+      console.log('There was an error canceling your order please refresh page!', error);
+      window.alert('There was an error canceling your order please refresh page!');
     });
 };
 
@@ -187,8 +188,8 @@ export const fillOrder = (dispatch, exchange, order, account) => {
       dispatch(orderFilling());
     })
     .on('error', (error) => {
-      console.log(error);
-      window.alert('There was an error!');
+      console.log('There was an error filling your order please refresh page!', error);
+      window.alert('There was an error filling your order please refresh page!');
     });
 };
 
@@ -248,8 +249,8 @@ export const depositEther = (dispatch, exchange, web3, token, amount, account) =
     dispatch(balancesLoading());
   })
   .on('error',(error) => {
-    console.error(error)
-    window.alert(`There was an error!`);
+    console.log('There was an error when depositing Ether please refresh page!', error)
+    window.alert('There was an error when depositing Ether please refresh page!');
   })
 };
 
@@ -264,8 +265,8 @@ export const depositToken = async (dispatch, exchange, web3, token, amount, acco
     })
   })
     .on('error',(error) => {
-      console.error(error)
-      window.alert(`There was an error!`);
+      console.log('There was an error when depositing DollHair tokens please refresh page!', error)
+      window.alert('There was an error when depositing DollHair tokens please refresh page!');
     })
 };
 
@@ -276,8 +277,8 @@ export const withdrawEther = (dispatch, exchange, web3, amount, account) => {
     dispatch(balancesLoading());
   })
   .on('error',(error) => {
-    console.error(error)
-    window.alert(`There was an error!`);
+    console.log('There was an error when withdrawing Ether tokens please refresh page!', error)
+    window.alert('There was an error when withdrawing Ether tokens please refresh page!');
   })
 };
 
@@ -287,8 +288,8 @@ export const withdrawToken = (dispatch, exchange, web3, token, amount, account) 
     dispatch(balancesLoading());
   })
   .on('error',(error) => {
-    console.error(error)
-    window.alert(`There was an error!`);
+    console.console('There was an error when withdrawing DollHair tokens please refresh page!', error)
+    window.alert('There was an error when withdrawing DollHair tokens please refresh page!');
   })
 };
 
@@ -305,8 +306,8 @@ export const makeBuyOrder = (dispatch, exchange, token, web3, order, account) =>
     dispatch(buyOrderMaking());
   })
   .on('error',(error) => {
-    console.error(error)
-    window.alert(`There was an error!`);
+    console.log('There was an error when making your order please refresh page!', error)
+    window.alert('There was an error when making buy order please refresh page!');
   })
 };
 
@@ -321,7 +322,7 @@ export const makeSellOrder = (dispatch, exchange, token, web3, order, account) =
     dispatch(sellOrderMaking());
   })
   .on('error',(error) => {
-    console.error(error)
-    window.alert(`There was an error!`);
+    console.log('There was an error when making sell order please refresh page!', error)
+    window.alert('There was an error when making sell order please refresh page!');
   })
 };

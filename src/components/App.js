@@ -90,8 +90,8 @@ class App extends Component {
               this.props.token, 
               this.props.account
             );
+            return;
           }
-          console.log('accountsChanged active')
         });
       
         this.props.provider.on("networkChanged", async (networkId) => {
@@ -99,7 +99,8 @@ class App extends Component {
             return;
           }
           await this.clearBlockchainData(dispatch);
-          window.alert('Only support for Kovan Network');
+          window.alert('This exchange only supports transaction on Kovan Test Network please change your network.');
+          return;
         });
       }
 
@@ -125,7 +126,7 @@ class App extends Component {
       await clearToken(dispatch);
       await clearExchange(dispatch);
     } catch(err) {
-      console.log(err);
+      console.log("Could not disconnect wallet", err);
     }
   }
 
@@ -155,7 +156,7 @@ class App extends Component {
           <p>Author: Idris Bowman</p>
           <ul>
             <li>Website: <a target="_blank" rel="noopener noreferrer" href="https://idrisbowman.com">https://idrisbowman.com</a></li>
-            <li>Github: <a target="_blank" rel="noopener noreferrer" href="https://github.com/dris1995 ">https://github.com/dris1995 </a></li>
+            <li>Github: <a target="_blank" rel="noopener noreferrer" href="https://github.com/V00D00-child">https://github.com/V00D00-child</a></li>
           </ul>
           <hr></hr>
           <h3  className="text-left">What can you do</h3>
