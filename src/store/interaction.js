@@ -31,7 +31,7 @@ import {
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
-const INFURA_ID = '';
+const INFURA_ID = process.env.INFURA_API_KEY || '';
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
@@ -107,7 +107,7 @@ export const loadAccount = async (web3, dispatch) => {
 }
 
 export const clearWeb3 = (dispatch) => {
-  console.log('infs', INFURA_ID)
+  console.log('infs', INFURA_ID);
   dispatch(web3Cleared())
   return null;
 }
