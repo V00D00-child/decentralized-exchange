@@ -18928,12 +18928,13 @@
         }
       },
       "links": {},
-      "address": "0x288703404e26a7f61eB89b2505de0dA15C9E1CfB",
-      "transactionHash": "0x42b22639a1bf9d98e0e7ca2826a93cd4db10130feb8c3e5a59956ecedcd8363a"
+      "address": "0xC77515080Bb661930c913dB1c356Cd230eac9790",
+      "transactionHash": "0xfc9772e0796773f9abc1093ba1ffa8a96ec9378f93998735b06185c8033d08fc"
     }
   },
   "schemaVersion": "3.2.5",
-  "updatedAt": "2021-08-07T20:40:33.763Z",
+  "updatedAt": "2021-08-17T01:08:40.855Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

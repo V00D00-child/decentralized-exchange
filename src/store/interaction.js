@@ -30,7 +30,7 @@ import {
 } from './actions';
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
-import { ETHER_ADDRESS } from '../helpers';
+import { ETHER_ADDRESS, formatBalance} from '../helpers';
 
 // WEB3
 export const loadWeb3 = (dispatch) => {
@@ -188,34 +188,78 @@ export const cancelOrder = (dispatch, exchange, order, account) => {
 };
 
 // FILL ORDERS
-export const fillOrder = (dispatch, exchange, order, account) => {
-  // TODO: Check balances before fill orders
+export const fillOrder = async (dispatch, exchange,token, order, account) => {
+  const orderFillerExchangeEtherBalance = await exchange.methods.balanceOf(ETHER_ADDRESS, account).call();
+  const orderFillerExchangeTokenBalance = await exchange.methods.balanceOf(token.options.address, account).call();
+  const orderMakerExchangeEtherBalance = await exchange.methods.balanceOf(ETHER_ADDRESS, order.user).call();
+  const orderMakerExchangeTokenBalance = await exchange.methods.balanceOf(token.options.address, order.user).call();
+  const exchangeFee = (formatBalance(order.amountGet) * .10);
+
+  // don't allow order maker to fill own order
+  if (account.toLowerCase() === order.user.toLowerCase()) {
+    window.alert('You cannot fill a order that you created.');
+    return;
+  }
+
+  // Check trader exchange balance before making any trades
+  if (order.orderFilledAction === 'sell') {
+    // Make sure order filler has enough DollHair tokens deposited to make trade for Ether
+    if ((formatBalance(order.amountGet) + exchangeFee) > formatBalance(orderFillerExchangeTokenBalance)) {
+      window.alert('You do not have enough DollHiar tokens deposited to make this trade.');
+      return;
+    }
+
+    // Make sure order maker has enough Ether deposited to make trade
+    if ((formatBalance(order.amountGive)) > formatBalance(orderMakerExchangeEtherBalance)) {
+      window.alert('The order maker does not have Ether deposited to make this trade.');
+      return;
+    }
+  } else if (order.orderFilledAction === 'buy') {
+    // Make sure order filler has enough Ether deposited to make trade for DollHair
+    if ((formatBalance(order.amountGet) + exchangeFee) > formatBalance(orderFillerExchangeEtherBalance)) {
+      window.alert('You do not have enough Ether deposited to make this trade for DollHair token. Please deposit more Eth.');
+      return;
+    }
+
+    // Make sure order maker has enough DollHair tokens deposited to make trade
+    if (formatBalance(order.amountGive) > formatBalance(orderMakerExchangeTokenBalance)) {
+      window.alert('The order maker does not have enough DollHair token deposited to make this trade.');
+      return;
+    }
+  }
+
   exchange.methods.fillOrder(order.id).send({ from: account })
     .on('transactionHash', (hash) => {
       dispatch(orderFilling());
     })
     .on('error', (error) => {
-      console.log('There was an error filling your order please refresh page!', error);
-      window.alert('There was an error filling your order please refresh page!');
+      if (error.code === 4001) {
+        return;
+      } else {
+        window.alert('There was an error filling your order please refresh page!');
+      }
     });
 };
 
 // BLOCKCHAIN EVENTS
-export const subscribeToEvents = (exchange, dispatch) => {
+export const subscribeToEvents = (exchange, dispatch, web3, token, account) => {
   exchange.events.Cancel({}, (error, event) => {
     dispatch(orderCancelled(event.returnValues));
   });
 
   exchange.events.Trade({}, (error, event) => {
     dispatch(orderFilled(event.returnValues));
+    loadBalances(dispatch, web3, exchange, token, account);
   });
 
   exchange.events.Deposit({}, (error, event) => {
     dispatch(balancesLoaded());
+    loadBalances(dispatch, web3, exchange, token, account);
   });
 
   exchange.events.Withdraw({}, (error, event) => {
     dispatch(balancesLoaded());
+    loadBalances(dispatch, web3, exchange, token, account);
   });
 
   exchange.events.Order({}, (error, event) => {

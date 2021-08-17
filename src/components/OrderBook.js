@@ -7,12 +7,13 @@ import {
   orderBookLoadedSelector,
   exchangeSelector,
   accountSelector,
-  orderFillingSelector
+  orderFillingSelector,
+  tokenSelector,
 } from '../store/selectors'
 import { fillOrder } from '../store/interaction';
 
 const renderOrder = (order, props) => {
-    const { dispatch, exchange, account } = props;
+    const { dispatch, exchange, account, token} = props;
   
     return(
       <OverlayTrigger
@@ -27,7 +28,7 @@ const renderOrder = (order, props) => {
         <tr
           key={order.id}
           className="order-book-order"
-          onClick={(e) => fillOrder(dispatch, exchange, order, account)}
+          onClick={(e) => fillOrder(dispatch, exchange, token, order, account)}
         >
           <td>{order.tokenAmount}</td>
           <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
@@ -58,7 +59,7 @@ class OrderBook extends Component {
             <div className="vertical">
                 <div className="card bg-dark text-white">
                     <div className="card-header">
-                        Order Book
+                        Order Book (10% trade fee)
                     </div>
                     <div className="card-body">
                         <table className="table table-dark table-sm small">
@@ -80,7 +81,8 @@ function mapStateToProps(state) {
         orderBook: orderBookSelector(state),
         showOrderBook: orderBookLoaded && !orderFilling,
         exchange: exchangeSelector(state),
-        account: accountSelector(state)
+        account: accountSelector(state),
+        token: tokenSelector(state),
     }
 }
   
