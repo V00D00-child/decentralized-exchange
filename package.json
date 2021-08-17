@@ -54,6 +54,7 @@
     "deploy:contract:dev": "truffle migrate --reset",
     "seed:script:dev": "truffle exec scripts/seed-exchange.js",
     "deploy:contract:kovan": "truffle migrate --network kovan",
+    "deploy:contract:main": "truffle migrate --network main",
     "seed:script:kovan": "truffle exec scripts/seed-exchange.js --network kovan",
     "findContracts": "truffle networks",
     "contact:flatten": "npx truffle-flattener ./src/contracts/Exchange.sol > ./text.sol",
