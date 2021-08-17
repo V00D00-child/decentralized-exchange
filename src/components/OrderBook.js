@@ -10,7 +10,9 @@ import {
   orderFillingSelector,
   tokenSelector,
 } from '../store/selectors'
-import { fillOrder } from '../store/interaction';
+import { fillOrder, loadAllOrders } from '../store/interaction';
+import { FiRefreshCw } from 'react-icons/fi';
+
 
 const renderOrder = (order, props) => {
     const { dispatch, exchange, account, token} = props;
@@ -60,6 +62,7 @@ class OrderBook extends Component {
                 <div className="card bg-dark text-white">
                     <div className="card-header">
                         Order Book (10% trade fee)
+                        <FiRefreshCw className="orderbook-refresh" onClick={async (e)  => await loadAllOrders(this.props.exchange, this.props.dispatch)}/>
                     </div>
                     <div className="card-body">
                         <table className="table table-dark table-sm small">
