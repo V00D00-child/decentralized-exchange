@@ -20,6 +20,12 @@
 - DollHair Token - https://kovan.etherscan.io/address/0x81F22B6fB7D6D63eDEf8c7b321b6a812189Bb5c6
 
 
+## View live (Kovan test network)
+You will need Ether on Kovan test network to use app
+- get ether for test network: https://app.mycrypto.com/faucet
+- https://exchange.idrisbowman.com/
+
+
 ## Set up to run locally
 1. npm install
 2. Install Ganache and start it up locally(this is our local blockchain network)
